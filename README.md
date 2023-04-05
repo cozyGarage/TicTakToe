@@ -19,3 +19,6 @@ Most of the visual changes were small tweaks to the original or to reflect addit
 
 ![image](https://user-images.githubusercontent.com/9263674/230105602-9ddeb1f6-5839-4a31-9948-ba235af8ecb9.png)
  3rd of April. I finish the layout as well as the style. UI. the logic to control all the grid will be work next.
+
+![image](https://user-images.githubusercontent.com/9263674/230115012-4da4a687-6f22-4665-9225-6ab20eb0b698.png)
+Design the MVC . Model - View - Control. It is a software architecture design pattern.
