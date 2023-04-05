@@ -12,5 +12,5 @@ const App = {
     }
 };
 
-window.addEventListener("load", () => App.init());
+window.addEventListener("load", App.init());
 
