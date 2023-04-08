@@ -9,7 +9,11 @@ This file is intended to add context to the examples in this repository. The sec
   - Vanilla ES6 (see `typescript` branch for a TS implementation)
   - React (see `typescript` branch for a TS implementation)
 
-I have created this tutorial in a _sequential_ fashion. Each example builds on and references previous examples. While examples can be viewed in isolation, the best way to learn is to read through them in order!
+I create this new project based on tutorial from freecodecamp.org and the origin project from Github which i will demonstrate below.
+
+## Original Design
+
+![Screenshot 2023-04-08 at 16 30 48](https://user-images.githubusercontent.com/9263674/230723987-63f67380-b353-4fa8-bf78-8e3f4dcb778a.png)
 
 ## Visual Design
 
