@@ -1,8 +1,11 @@
 const App = {
     // All of our selected HTML elements
     $: {
-        menu: document.querySelector(".menu"),
-        menuItems: document.querySelector(".items"),
+        menu: document.querySelector('[data-id="menu"]'),
+        menuItems: document.querySelector('[data-id="menu-items"]'),
+        reset-btn: document.querySelector('[data-id="reset-btn"]'),
+        newRound-btn: document.querySelector('[data-id="new-round-btn"]'),
+
     },
 
     init(){
