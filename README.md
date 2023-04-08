@@ -23,4 +23,6 @@ Most of the visual changes were small tweaks to the original or to reflect addit
 ![image](https://user-images.githubusercontent.com/9263674/230115012-4da4a687-6f22-4665-9225-6ab20eb0b698.png)
 Design the MVC . Module - View - Control. It is a software architecture design pattern.
 
-In order to build an application, 
+5th of April 2023. When i put all the javascript function in a file, it seem to have a lot of problem and it is very hard to scale and troubleshoot the bug
+
+So i learn about MVC pattern and redesign the code.
