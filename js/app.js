@@ -3,8 +3,8 @@ const App = {
     $: {
         menu: document.querySelector('[data-id="menu"]'),
         menuItems: document.querySelector('[data-id="menu-items"]'),
-        reset-btn: document.querySelector('[data-id="reset-btn"]'),
-        newRound-btn: document.querySelector('[data-id="new-round-btn"]'),
+        resetBtn: document.querySelector('[data-id="reset-btn"]'),
+        newRoundBtn: document.querySelector('[data-id="new-round-btn"]'),
 
     },
 
