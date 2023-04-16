@@ -39,4 +39,5 @@ So i learn about MVC pattern and redesign the code.
 
 ![Screenshot 2023-04-08 at 16 01 39](https://user-images.githubusercontent.com/9263674/230722581-c388672d-bdcc-4cfe-88f2-af7d19d90ae2.png)
 
-
+Update 16/4/2023
+improve code from for to foreach
