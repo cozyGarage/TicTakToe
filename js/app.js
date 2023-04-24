@@ -1,7 +1,7 @@
 import Store from "./store.js";
 import View from "./view.js";
 
-// Our players "config" - defines icons, colors, name, etc.
+// The players array defines the configuration of the game's players including their icons, colors, and names.
 const players = [
   {
     id: 1,
@@ -18,14 +18,17 @@ const players = [
 ];
 
 // MVC pattern
+// The init function is the entry point of the application that sets up the Model, View, and Controller components.
 function init() {
   // "Model"
+  // The Store class implements the Model component and is responsible for managing the game state and statistics.
   const store = new Store("game-state-key", players);
 
   // "View"
+  // The View class implements the View component and is responsible for rendering the game board and UI.
   const view = new View();
 
-  // "Controller" logic (event listeners + handlers)
+  // The Controller logic includes event listeners and handlers that interact with the Model and View components.
 
   /**
    * Listen for changes to the game state, re-render view when change occurs.
@@ -47,7 +50,9 @@ function init() {
 
   // When the HTML document first loads, render the view based on the current state.
   view.render(store.game, store.stats);
-
+  /* The view.bindGameResetEvent, view.bindNewRoundEvent, and view.bindPlayerMoveEvent methods bind 
+   *  event handlers to UI elements that interact with the Model component.
+   */
   view.bindGameResetEvent((event) => {
     store.reset();
   });
