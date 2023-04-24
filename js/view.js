@@ -1,9 +1,10 @@
 import Store from "./store.js";
 
 export default class View {
+  // Empty object $ and $$
   $ = {};
   $$ = {};
-
+  //constructor() method, which selects HTML elements from the DOM and initializes event listeners.
   constructor() {
     /**
      * Pre-select all the elements we'll need (for convenience and clarity)
@@ -172,8 +173,7 @@ export default class View {
    */
   #qs(selector, parent) {
     const el = parent
-      ? parent.querySelector(selector)
-      : document.querySelector(selector);
+      ? parent.querySelector(selector) : document.querySelector(selector);
 
     if (!el) throw new Error("Could not find element");
 
