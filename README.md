@@ -154,3 +154,4 @@ _Tip: If you want to understand a pure MVC pattern better, I suggest building (o
 - `store.js` - This is the "Model" of MV\* that is responsible for managing game state.
 - `view.js` - This is the "View" of MV\* that is responsible for manipulating DOM elements and registering event listeners.
 - `app.js` - A small file that ties everything together and renders the UI (i.e. the "Controller").
+-
