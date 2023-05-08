@@ -1,11 +1,11 @@
 I refactor this app based on the original design. and I try to redesign it in MVC pattern. The process should be Visual Design (HTML,CSS) - Game State (create basic logic for game like fill the board, announce the player,...) and then redesign in MVC pattern to see the advantages of it as well as the thought flow in how to design a app with MVC pattern.
 
 
-- **Game Design** - generic notes on designing a Tic Tac Toe game that will be used in each example.
+ **Game Design** - generic notes on designing a Tic Tac Toe game that will be used in each example.
   - [Visual Design](#visual-design)
   - [Game State](#game-state-design)
   - [MVC Pattern](#mvc-pattern)
-- **Examples** - There are comments throughout the code that attempt to explain important concepts.
+ **Examples** - There are comments throughout the code that attempt to explain important concepts.
   - Vanilla ES6 (see `typescript` branch for a TS implementation)
   - React (see `typescript` branch for a TS implementation)
 
