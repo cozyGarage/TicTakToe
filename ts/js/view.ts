@@ -1,9 +1,10 @@
-import Store from "./store";
 
+// The View class is responsible for rendering the UI and handling UI-only events.
 export default class View {
   // Empty object $ and $$
-  $ = {};
-  $$ = {};
+  $: Record<string, Element> = {};
+  // type
+  $$: Record<string, NodeListOf<Element>> = {};
   //constructor() method, which selects HTML elements from the DOM and initializes event listeners.
   constructor() {
     /**
@@ -171,7 +172,7 @@ export default class View {
    * The #qs and #qsAll methods are "safe selectors", meaning they
    * _guarantee_ the elements we select exist in the DOM (otherwise throw an error)
    */
-  #qs(selector, parent) {
+  #qs(selector: string, parent?: Element) {
     const el = parent
       ? parent.querySelector(selector) : document.querySelector(selector);
 
@@ -180,7 +181,7 @@ export default class View {
     return el;
   }
 
-  #qsAll(selector) {
+  #qsAll(selector: string) {
     const elList = document.querySelectorAll(selector);
 
     if (!elList) throw new Error("Could not find elements");

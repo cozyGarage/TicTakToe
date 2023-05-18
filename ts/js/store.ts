@@ -1,4 +1,6 @@
-const initialState = {
+import type { Player, gameState,  } from "./types";
+
+const initialState: gameState = {
     currentGameMoves: [], // All the player moves for the active game
     history: {
       currentRoundGames: [],
@@ -18,13 +20,13 @@ const initialState = {
    * state changes, which the controller can listen for to know when to re-render the view.
    */
   export default class Store extends EventTarget {
-    constructor(key, players) {
+    constructor(
+      private readonly storageKey: string, 
+      private readonly players: Player[]) {
       // Since we're extending EventTarget, need to call super() so we have access to instance methods
       super();
   
-      // Key to use for localStorage state object
-      this.storageKey = key;
-      this.players = players;
+      // If no state exists in localStorage, initialize it
     }
   
     /** stats() and game() are Convenience "getters"
@@ -105,7 +107,7 @@ const initialState = {
       };
     }
   
-    playerMove(squareId) {
+    playerMove(squareId: number) {
       /**
        * Never mutate state directly.  Create copy of state, edit the copy,
        * and save copy as new version of state.
@@ -152,7 +154,7 @@ const initialState = {
     newRound() {
       this.reset();
   
-      const stateClone = structuredClone(this.#getState());
+      const stateClone = structuredClone(this.#getState()) as gameState;
       stateClone.history.allGames.push(...stateClone.history.currentRoundGames);
       stateClone.history.currentRoundGames = [];
   
@@ -169,7 +171,7 @@ const initialState = {
      * We are not using Redux here, but it gives a good overview of some essential concepts to managing state:
      * @see https://redux.js.org/understanding/thinking-in-redux/three-principles#changes-are-made-with-pure-functions
      */
-    #saveState(stateOrFn) {
+    #saveState(stateOrFn: gameState|((prevState: gameState) => gameState)) {
       const prevState = this.#getState();
   
       let newState;
@@ -189,8 +191,8 @@ const initialState = {
       this.dispatchEvent(new Event("statechange"));
     }
   
-    #getState() {
+    #getState(): gameState {
       const item = window.localStorage.getItem(this.storageKey);
-      return item ? JSON.parse(item) : initialState;
+      return item ? JSON.parse(item) as gameState : initialState;
     }
   }
