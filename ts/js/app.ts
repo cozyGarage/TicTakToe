@@ -1,8 +1,9 @@
 import Store from "./store";
+import { Player } from "./types";
 import View from "./view";
 
 // The players array defines the configuration of the game's players including their icons, colors, and names.
-const players = [
+const players: Player[] = [
   {
     id: 1,
     name: "Player 1",
