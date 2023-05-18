@@ -5,13 +5,10 @@ I refactor this app based on the original design. and I try to redesign it in MV
   - [Visual Design](#visual-design)
   - [Game State](#game-state-design)
   - [MVC Pattern](#mvc-pattern)
- **Examples** - There are comments throughout the code that attempt to explain important concepts.
-  - Vanilla ES6 (see `typescript` branch for a TS implementation)
-  - React (see `typescript` branch for a TS implementation)
 
 ## Visual Design
 
-I am not a professional designer, and therefore, I have kept the design refactor to a minimum.
+I am not a professional designer, and therefore, I try to design refactor the best as I could.
 
 Most of the visual changes were small tweaks to the original or to reflect additional functionality that was added as part of the refactor.
 
