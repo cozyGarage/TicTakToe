@@ -1,4 +1,4 @@
-import type { Player, gameState,  } from "./types";
+import type { Player, gameState,  } from "./types.js";
 
 const initialState: gameState = {
     currentGameMoves: [], // All the player moves for the active game

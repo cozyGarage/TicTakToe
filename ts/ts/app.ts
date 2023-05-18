@@ -1,6 +1,6 @@
-import Store from "./store";
-import { Player } from "./types";
-import View from "./view";
+import Store from "./store.js";
+import { Player } from "./types.js";
+import View from "./view.js";
 
 // The players array defines the configuration of the game's players including their icons, colors, and names.
 const players: Player[] = [

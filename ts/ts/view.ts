@@ -1,5 +1,5 @@
-import { Player, move } from "./types";
-import Store from "./store"; // import Store class from store.ts
+import { Player, move } from "./types.js";
+import Store from "./store.js"; // import Store class from store.ts
 // The View class is responsible for rendering the UI and handling UI-only events.
 export default class View {
   // Empty object $ and $$

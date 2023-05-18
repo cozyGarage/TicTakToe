@@ -13,6 +13,6 @@
   
     "skipLibCheck": true,                                 /* Skip type checking all .d.ts files. */
     "outDir": "./dist",                                  /* Redirect output structure to the directory. */
-    "noEmit": true,                                       /* Do not emit outputs. */
+    "rootDir": "./ts",                                  /* Specify the root directory of input files. Use to control the output directory structure with --outDir. */
   }
 }
