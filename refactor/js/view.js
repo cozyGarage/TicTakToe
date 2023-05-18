@@ -41,9 +41,7 @@ export default class View {
 
   /**
    * This application follows a declarative rendering methodology
-   * and will re-render every time the state changes
-   *
-   * @see https://www.zachgollwitzer.com/posts/imperative-programming#react-declarative-vs-jquery-imperative
+   * and will re-render every time the state changes.
    */
   render(game, stats) {
     const { playerWithStats, ties } = stats;
@@ -89,7 +87,7 @@ export default class View {
   }
 
   /**
-   * All methods below ⬇️ are private utility methods used for updating the UI
+   * All methods below are private utility methods used for updating the UI
    * -----------------------------------------------------------------------------
    */
 

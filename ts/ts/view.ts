@@ -43,11 +43,9 @@ export default class View {
 
   /**
    * This application follows a declarative rendering methodology
-   * and will re-render every time the state changes
-   *
-   * @see https://www.zachgollwitzer.com/posts/imperative-programming#react-declarative-vs-jquery-imperative
+   * and will re-render every time the state changes.
    */
-  render(game: Store['game'], stats: Store["stats"]) {
+  render(game: Store['game'], stats: Store["stats"]): void {
     const { playerWithStats, ties } = stats;
     const {
       moves,
