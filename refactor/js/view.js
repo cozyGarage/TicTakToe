@@ -1,11 +1,8 @@
-import Store from "./store.js";
 
-export default class View {
-  // Empty object $ and $$
-  $ = {};
-  $$ = {};
-  //constructor() method, which selects HTML elements from the DOM and initializes event listeners.
-  constructor() {
+export default class View {                           // The View class implements the View component and is responsible for rendering the game board and UI.
+  $ = {};                                  // The $ object contains single elements that are selected from the DOM.
+  $$ = {};                                // The $$ object contains lists of elements that are selected from the DOM.
+  constructor() {                                                 // The constructor method is called when a new instance of the View class is created. which selects HTML elements from the DOM and initializes event listeners.
     /**
      * Pre-select all the elements we'll need (for convenience and clarity)
      */
@@ -34,8 +31,8 @@ export default class View {
      * These are listeners that do not mutate state and therefore
      * can be contained within View entirely.
      */
-    this.$.menuBtn.addEventListener("click", (event) => {
-      this.#toggleMenu();
+    this.$.menuBtn.addEventListener("click", (event) => {                       // The $.menuBtn.addEventListener method listens for the click event on the menu button and calls the toggleMenu method when the event occurs.
+      this.#toggleMenu();                                                       // The toggleMenu method toggles the visibility of the menu items.
     });
   }
 
@@ -137,20 +134,20 @@ export default class View {
     icon.classList.remove("fa-chevron-up");
   }
 
-  #toggleMenu() {
-    this.$.menuItems.classList.toggle("hidden");
-    this.$.menuBtn.classList.toggle("border");
+  #toggleMenu() {                                                                 // The toggleMenu method toggles the visibility of the menu items.
+    this.$.menuItems.classList.toggle("hidden");                                  // The $.menuItems.classList.toggle method toggles the hidden class on the menu items.
+    this.$.menuBtn.classList.toggle("border");                                    // The $.menuBtn.classList.toggle method toggles the border class on the menu button.
 
-    const icon = this.$.menuBtn.querySelector("i");
+    const icon = this.$.menuBtn.querySelector("i");                               // The $.menuBtn.querySelector method selects the chevron icon from the menu button.
 
-    icon.classList.toggle("fa-chevron-down");
-    icon.classList.toggle("fa-chevron-up");
+    icon.classList.toggle("fa-chevron-down");                                     // The icon.classList.toggle method toggles the fa-chevron-down class on the chevron icon.
+    icon.classList.toggle("fa-chevron-up");                                       // The icon.classList.toggle method toggles the fa-chevron-up class on the chevron icon.
   }
 
-  #handlePlayerMove(squareEl, player) {
-    const icon = document.createElement("i");
-    icon.classList.add("fa-solid", player.iconClass, player.colorClass);
-    squareEl.replaceChildren(icon);
+  #handlePlayerMove(squareEl, player) {                                           // The #handlePlayerMove method is responsible for rendering a player's move on the game board.
+    const icon = document.createElement("i");                                   // The document.createElement method creates a new i element.
+    icon.classList.add("fa-solid", player.iconClass, player.colorClass);          // The icon.classList.add method adds the fa-solid, iconClass, and colorClass classes to the icon element.
+    squareEl.replaceChildren(icon);                                               // The squareEl.replaceChildren method replaces the contents of the square element with the icon element.
   }
 
   #setTurnIndicator(player) {
