@@ -189,10 +189,10 @@ export default class View {                           // The View class implemen
    * @param {*} eventKey the event type you are listening for (e.g. "click" event)
    * @param {*} handler the callback function that is executed when the specified event is triggered on the specified children
    */
-  #delegate(el, selector, eventKey, handler) {
-    el.addEventListener(eventKey, (event) => {
-      if (event.target.matches(selector)) {
-        handler(event.target);
+  #delegate(el, selector, eventKey, handler) {                                      // The #delegate method is used to listen for the click event on the game board and call the handler function when the event occurs.
+    el.addEventListener(eventKey, (event) => {                                      // The el.addEventListener method listens for the click event on the game board and calls the handler function when the event occurs.
+      if (event.target.matches(selector)) {                                         // The event.target.matches method checks if the target element matches the selector.
+        handler(event.target);                                                      // The handler function is called with the target element as an argument.
       }
     });
   }
