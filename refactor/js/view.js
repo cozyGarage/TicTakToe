@@ -8,7 +8,7 @@ export default class View {                           // The View class implemen
      */
 
     // Single elements
-    this.$.menu = this.#qs('[data-id="menu"]');
+    this.$.menu = this.#qs('[data-id="menu"]');                                   // The $.menu property is set to the menu element.
     this.$.menuBtn = this.#qs('[data-id="menu-btn"]');
     this.$.menuItems = this.#qs('[data-id="menu-items"]');
     this.$.resetBtn = this.#qs('[data-id="reset-btn"]');
@@ -23,7 +23,7 @@ export default class View {                           // The View class implemen
     this.$.grid = this.#qs('[data-id="grid"]');
 
     // Element lists
-    this.$$.squares = this.#qsAll('[data-id="square"]');
+    this.$$.squares = this.#qsAll('[data-id="square"]');                        // The $$.squares property is set to a list of square elements.
 
     /**
      * UI-only event listeners
@@ -40,29 +40,29 @@ export default class View {                           // The View class implemen
    * This application follows a declarative rendering methodology
    * and will re-render every time the state changes.
    */
-  render(game, stats) {
-    const { playerWithStats, ties } = stats;
-    const {
-      moves,
-      currentPlayer,
-      status: { isComplete, winner },
-    } = game;
+  render(game, stats) {                                                         // The render method is responsible for rendering the game board and UI.
+    const { playerWithStats, ties } = stats;                                    // The playerWithStats and ties variables are destructured from the stats object.
+    const {                                                                     // The playerWithStats array is sorted by the wins property of each player object.
+      moves,                                                                    // The moves, currentPlayer, isComplete, and winner variables are destructured from the game object.
+      currentPlayer,                                                            // The currentPlayer, isComplete, and winner variables are destructured from the game object.
+      status: { isComplete, winner },                                           // The currentPlayer, isComplete, and winner variables are destructured from the game object.
+    } = game;                                                                   // The currentPlayer, isComplete, and winner variables are destructured from the game object.
 
-    this.#closeAll();
-    this.#clearMoves();
-    this.#updateScoreboard(
-      playerWithStats[0].wins,
-      playerWithStats[1].wins,
-      ties
+    this.#closeAll();                                                           // The closeAll method closes the modal and menu.
+    this.#clearMoves();                                                         // The clearMoves method clears the moves from the game board.
+    this.#updateScoreboard(                                                     // The updateScoreboard method updates the scoreboard.
+      playerWithStats[0].wins,                                                  // The wins property of the first player object is passed as an argument.
+      playerWithStats[1].wins,                                                  // The wins property of the second player object is passed as an argument.
+      ties                                                                      // The ties variable is passed as an argument.
     );
-    this.#initializeMoves(moves);
+    this.#initializeMoves(moves);                                               // The initializeMoves method initializes the moves on the game board.
 
-    if (isComplete) {
-      this.#openModal(winner ? `${winner.name} wins!` : "Tie!");
+    if (isComplete) {                                                           // The isComplete variable is used to determine if the game is complete.
+      this.#openModal(winner ? `${winner.name} wins!` : "Tie!");                // The openModal method opens the modal and displays the winner or tie message.
       return;
     }
 
-    this.#setTurnIndicator(currentPlayer);
+    this.#setTurnIndicator(currentPlayer);                                      // The setTurnIndicator method sets the turn indicator.
   }
 
   /**
@@ -70,17 +70,17 @@ export default class View {                           // The View class implemen
    * ----------------------------------------------------------
    */
 
-  bindGameResetEvent(handler) {
-    this.$.resetBtn.addEventListener("click", handler);
-    this.$.modalBtn.addEventListener("click", handler);
+  bindGameResetEvent(handler) {                                                 // The bindGameResetEvent method binds an event handler to the UI element that resets the game.
+    this.$.resetBtn.addEventListener("click", handler);                         // The $.resetBtn.addEventListener method listens for the click event on the reset button and calls the handler function when the event occurs.
+    this.$.modalBtn.addEventListener("click", handler);                         // The $.modalBtn.addEventListener method listens for the click event on the modal button and calls the handler function when the event occurs.
   }
 
-  bindNewRoundEvent(handler) {
-    this.$.newRoundBtn.addEventListener("click", handler);
+  bindNewRoundEvent(handler) {                                                  // The bindNewRoundEvent method binds an event handler to the UI element that starts a new round.
+    this.$.newRoundBtn.addEventListener("click", handler);                      // The $.newRoundBtn.addEventListener method listens for the click event on the new round button and calls the handler function when the event occurs.
   }
 
-  bindPlayerMoveEvent(handler) {
-    this.#delegate(this.$.grid, '[data-id="square"]', "click", handler);
+  bindPlayerMoveEvent(handler) {                                                // The bindPlayerMoveEvent method binds an event handler to the UI element that allows a player to make a move.
+    this.#delegate(this.$.grid, '[data-id="square"]', "click", handler);        // The #delegate method is used to listen for the click event on the game board and call the handler function when the event occurs.
   }
 
   /**
@@ -120,18 +120,16 @@ export default class View {                           // The View class implemen
     });
   }
 
-  #closeModal() {
-    this.$.modal.classList.add("hidden");
+  #closeModal() {                                                                 // The closeModal method closes the modal.
+    this.$.modal.classList.add("hidden");                                         // The $.modal.classList.add method adds the hidden class to the modal element.
   }
 
-  #closeMenu() {
-    this.$.menuItems.classList.add("hidden");
-    this.$.menuBtn.classList.remove("border");
-
-    const icon = this.$.menuBtn.querySelector("i");
-
-    icon.classList.add("fa-chevron-down");
-    icon.classList.remove("fa-chevron-up");
+  #closeMenu() {                                                                  // The closeMenu method closes the menu.
+    this.$.menuItems.classList.add("hidden");                                     // The $.menuItems.classList.add method adds the hidden class to the menu items.
+    this.$.menuBtn.classList.remove("border");                                    // The $.menuBtn.classList.remove method removes the border class from the menu button.
+    const icon = this.$.menuBtn.querySelector("i");                               // The $.menuBtn.querySelector method selects the chevron icon from the menu button.
+    icon.classList.add("fa-chevron-down");                                        // The icon.classList.add method adds the fa-chevron-down class to the chevron icon.
+    icon.classList.remove("fa-chevron-up");                                       // The icon.classList.remove method removes the fa-chevron-up class from the chevron icon.
   }
 
   #toggleMenu() {                                                                 // The toggleMenu method toggles the visibility of the menu items.
@@ -145,7 +143,7 @@ export default class View {                           // The View class implemen
   }
 
   #handlePlayerMove(squareEl, player) {                                           // The #handlePlayerMove method is responsible for rendering a player's move on the game board.
-    const icon = document.createElement("i");                                   // The document.createElement method creates a new i element.
+    const icon = document.createElement("i");                                     // The document.createElement method creates a new i element.
     icon.classList.add("fa-solid", player.iconClass, player.colorClass);          // The icon.classList.add method adds the fa-solid, iconClass, and colorClass classes to the icon element.
     squareEl.replaceChildren(icon);                                               // The squareEl.replaceChildren method replaces the contents of the square element with the icon element.
   }
@@ -157,20 +155,19 @@ export default class View {                           // The View class implemen
     icon.classList.add("fa-solid", player.colorClass, player.iconClass);          // The icon.classList.add method adds the fa-solid, colorClass, and iconClass classes to the icon element.
 
     label.classList.add(player.colorClass);                                       // The label.classList.add method adds the colorClass class to the label element.
-    label.innerText = `${player.name}, you're up!`;
-
-    this.$.turn.replaceChildren(icon, label);
+    label.innerText = `${player.name}, you're up!`;                               // The label.innerText property sets the text content of the label element.
+    this.$.turn.replaceChildren(icon, label);                                     // The $.turn.replaceChildren method replaces the contents of the turn element with the icon and label elements.
   }
 
   /**
    * The #qs and #qsAll methods are "safe selectors", meaning they
    * _guarantee_ the elements we select exist in the DOM (otherwise throw an error)
    */
-  #qs(selector, parent) {
-    const el = parent
-      ? parent.querySelector(selector) : document.querySelector(selector);
+  #qs(selector, parent) {                                                           // The #qs method is a "safe selector" that selects a single element from the DOM.
+    const el = parent                                                               
+      ? parent.querySelector(selector) : document.querySelector(selector);          // The parent argument is used to select an element from a parent element.
 
-    if (!el) throw new Error("Could not find element");
+    if (!el) throw new Error("Could not find element");                             // The #qs method throws an error if the element does not exist.
 
     return el;
   }
