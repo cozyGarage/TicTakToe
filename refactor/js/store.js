@@ -42,32 +42,32 @@ const initialState = {                // Initial state of the app
      *
      * @see - https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/get
      */
-    get stats() {
-      const state = this.#getState();
+    get stats() {                                           // The stats getter method returns an object with the playerWithStats and ties properties.
+      const state = this.#getState();                       // The state variable is set to the return value of the #getState method.
   
       return {
-        playerWithStats: this.players.map((player) => {
-          const wins = state.history.currentRoundGames.filter(
-            (game) => game.status.winner?.id === player.id
-          ).length;
+        playerWithStats: this.players.map((player) => {                     // The playerWithStats property is set to an array of player objects with the wins property added.
+          const wins = state.history.currentRoundGames.filter(              // The wins property is set to the number of games won by the player.
+            (game) => game.status.winner?.id === player.id                  // The status.winner.id property of the game object is compared to the id of the player.
+          ).length;                                                         // The length of the array is the number of games won by the player.
   
           return {
-            ...player,
-            wins,
+            ...player,                                                    // The player object is spread into the new object.
+            wins,                                                         // The wins property is set to the wins variable.
           };
         }),
-        ties: state.history.currentRoundGames.filter(
-          (game) => game.status.winner === null
-        ).length,
+        ties: state.history.currentRoundGames.filter(                     // The ties property is set to the number of games tied.
+          (game) => game.status.winner === null                           // The status.winner property of the game object is compared to null.
+        ).length,                     
       };
     }
   
-    get game() {
+    get game() {                                                          // The game getter method returns an object with the moves, currentPlayer, and status properties.
       const state = this.#getState();
   
-      const currentPlayer = this.players[state.currentGameMoves.length % 2];
+      const currentPlayer = this.players[state.currentGameMoves.length % 2];          // The currentPlayer property is set to the player whose turn it is.
   
-      const winningPatterns = [
+      const winningPatterns = [                                           // The winningPatterns variable is set to an array of arrays of winning patterns.
         [1, 2, 3],
         [1, 5, 9],
         [1, 4, 7],
@@ -78,16 +78,16 @@ const initialState = {                // Initial state of the app
         [7, 8, 9],
       ];
   
-      let winner = null;
+      let winner = null;                                                // The winner variable is set to null.
   
-      for (const player of this.players) {
-        const selectedSquareIds = state.currentGameMoves
-          .filter((move) => move.player.id === player.id)
-          .map((move) => move.squareId);
+      for (const player of this.players) {                              // The for...of loop iterates over the players array.
+        const selectedSquareIds = state.currentGameMoves                // The selectedSquareIds variable is set to an array of the ids of the squares selected by the player.
+          .filter((move) => move.player.id === player.id)               // The player.id property of the move object is compared to the id of the player.
+          .map((move) => move.squareId);                                // The squareId property of the move object is mapped to the selectedSquareIds array.
   
-        for (const pattern of winningPatterns) {
-          if (pattern.every((v) => selectedSquareIds.includes(v))) {
-            winner = player;
+        for (const pattern of winningPatterns) {                        // The for...of loop iterates over the winningPatterns array.
+          if (pattern.every((v) => selectedSquareIds.includes(v))) {      // The every method checks if every element of the pattern array is included in the selectedSquareIds array.
+            winner = player;                                            // The winner variable is set to the player.
           }
         }
       }
