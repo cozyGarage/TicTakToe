@@ -148,12 +148,10 @@ const initialState = {                // Initial state of the app
      */
     newRound() {                                                                            // The newRound method resets the game state for a new round.
       this.reset();                                                                         // The reset method is called.
-  
       const stateClone = structuredClone(this.#getState());                                 // The stateClone variable is set to a deep copy of the state object.
       stateClone.history.allGames.push(...stateClone.history.currentRoundGames);              // The allGames property of the history object is set to an array of the games played in the current round.
       stateClone.history.currentRoundGames = [];                                            // The currentRoundGames property of the history object is set to an empty array.
-  
-      this.#saveState(stateClone);
+      this.#saveState(stateClone);                                                            // The #saveState method is called with the stateClone variable as an argument.
     }
   
     /**
