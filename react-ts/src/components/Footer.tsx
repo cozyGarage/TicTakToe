@@ -12,10 +12,10 @@ export default function Footer() {
       <p>
         Refactored by
         <a
-          href="https://twitter.com/zg_dev"
+          href="https://github.com/cozyGarage" target="_blank" rel="noreferrer"
           style={{ color: "var(--turquoise)" }}
         >
-          @zg_dev
+          cozyGarage
         </a>
       </p>
     </footer>
