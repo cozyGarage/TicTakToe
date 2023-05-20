@@ -126,12 +126,12 @@ const initialState = {                // Initial state of the app
      * If the current game is complete, the game is archived.
      * If the current game is NOT complete, it is deleted.
      */
-    reset() {
-      const stateClone = structuredClone(this.#getState());
+    reset() {                                                         
+      const stateClone = structuredClone(this.#getState());                 // The stateClone variable is set to a deep copy of the state object.
   
-      const { status, moves } = this.game;
+      const { status, moves } = this.game;                                  // The status and moves properties of the game object are destructured.
   
-      if (status.isComplete) {
+      if (status.isComplete) {                                              // If the isComplete property of the status object is true, the game is archived.
         stateClone.history.currentRoundGames.push({
           moves,
           status,
