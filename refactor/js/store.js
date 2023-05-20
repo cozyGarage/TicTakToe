@@ -17,14 +17,11 @@ const initialState = {                // Initial state of the app
    * This class extends EventTarget so we can emit a `statechange` event when
    * state changes, which the controller can listen for to know when to re-render the view.
    */
-  export default class Store extends EventTarget { // The Store class extends the EventTarget class, which allows it to emit a custom statechange event when the state changes. 
-    constructor(key, players) {
-      // Since we're extending EventTarget, need to call super() so we have access to instance methods
-      super();
-  
-      // Key to use for localStorage state object
-      this.storageKey = key;
-      this.players = players;
+  export default class Store extends EventTarget {          // The Store class extends the EventTarget class, which allows it to emit a custom statechange event when the state changes. 
+    constructor(key, players) {                             // The constructor method accepts a key and players as arguments.
+      super();                                              // The super method calls the constructor of the parent class. Since we're extending EventTarget, need to call super() so we have access to instance methods
+      this.storageKey = key;                                // The storageKey property is set to the key argument.
+      this.players = players;                               // The players property is set to the players argument.
     }
   
     /** stats() and game() are Convenience "getters"
