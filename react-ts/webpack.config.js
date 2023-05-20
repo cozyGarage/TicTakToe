@@ -1,9 +1,9 @@
-const CopyWebpackPlugin = require("copy-webpack-plugin");
-const path = require("path");
+const CopyWebpackPlugin = require("copy-webpack-plugin"); // Copies individual files or entire directories to the build directory
+const path = require("path"); // Node.js path module for working with file paths
 
 
 module.exports = {
-  mode: process.env.NODE_ENV ?? "development",
+  mode: process.env.NODE_ENV ?? "development", // Use "production" for minified bundle
   entry: "./src/entrypoint.tsx", // Entry point of your application
   module: {
     rules: [
@@ -13,12 +13,12 @@ module.exports = {
        * This will load our React component files
        */
       {
-        test: /\.tsx?$/,
+        test: /\.tsx?$/, // File extension pattern for TypeScript and JSX files
 
         /** This uses tsc (TypeScript compiler) under the hood, and reads tsconfig.json for config */
-        use: "ts-loader",
+        use: "ts-loader", // Loader for TypeScript files
 
-        exclude: /node_modules/,
+        exclude: /node_modules/, // Exclude the 'node_modules' folder from being processed
       },
 
       /**
@@ -27,8 +27,8 @@ module.exports = {
        * This will load our per-component CSS files
        */
       {
-        test: /\.css$/,
-        use: ["style-loader", "css-loader"],
+        test: /\.css$/, // File extension pattern for CSS files
+        use: ["style-loader", "css-loader"], // Loaders to apply to CSS files
       },
     ],
   },
@@ -53,7 +53,7 @@ module.exports = {
    */
   plugins: [
     new CopyWebpackPlugin({
-      patterns: [{ from: "public" }],
+      patterns: [{ from: "public" }], // Copy all files from /public to /dist
     }),
   ],
 };
