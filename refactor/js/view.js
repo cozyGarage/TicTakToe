@@ -150,13 +150,13 @@ export default class View {                           // The View class implemen
     squareEl.replaceChildren(icon);                                               // The squareEl.replaceChildren method replaces the contents of the square element with the icon element.
   }
 
-  #setTurnIndicator(player) {
-    const icon = document.createElement("i");
-    const label = document.createElement("p");
+  #setTurnIndicator(player) {                                                     // The #setTurnIndicator method is responsible for rendering the player's turn indicator.
+    const icon = document.createElement("i");                                     // The document.createElement method creates a new i element.
+    const label = document.createElement("p");                                    // The document.createElement method creates a new p element.
 
-    icon.classList.add("fa-solid", player.colorClass, player.iconClass);
+    icon.classList.add("fa-solid", player.colorClass, player.iconClass);          // The icon.classList.add method adds the fa-solid, colorClass, and iconClass classes to the icon element.
 
-    label.classList.add(player.colorClass);
+    label.classList.add(player.colorClass);                                       // The label.classList.add method adds the colorClass class to the label element.
     label.innerText = `${player.name}, you're up!`;
 
     this.$.turn.replaceChildren(icon, label);
