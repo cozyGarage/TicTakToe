@@ -4,10 +4,10 @@ import View from "./view.js";             // The View class implements the View 
 
 const players = [                         // The players array defines the configuration of the game's players including their icons, colors, and names.
   {
-    id: 1,
-    name: "Player 1",
-    iconClass: "fa-x",
-    colorClass: "turquoise",
+    id: 1,                                // The id property is used to identify the player.
+    name: "Player 1",                     // The name property is used to display the player's name in the UI.
+    iconClass: "fa-x",                    // The iconClass property is used to display the player's icon in the UI.
+    colorClass: "turquoise",              // The colorClass property is used to display the player's icon color in the UI.
   },
   {
     id: 2,
