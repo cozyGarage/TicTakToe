@@ -7,28 +7,21 @@ const path = require("path");
  */
 module.exports = {
   mode: process.env.NODE_ENV ?? "development",
-  entry: "./src/entrypoint.jsx",
+  entry: "./src/entrypoint.tsx",
   module: {
     rules: [
       /**
-       * JS/JSX Loader
+       * TS/TSX Loader
        *
        * This will load our React component files
        */
       {
-        test: /.jsx?$/,
+        test: /.tsx?$/,
+
+        /** This uses tsc (TypeScript compiler) under the hood, and reads tsconfig.json for config */
+        use: "ts-loader",
+
         exclude: /node_modules/,
-        use: [
-          {
-            loader: "babel-loader",
-            options: {
-              presets: [
-                "@babel/preset-env", // Browser compatibility / polyfills
-                ["@babel/preset-react", { runtime: "automatic" }], // Turns JSX => JS
-              ],
-            },
-          },
-        ],
       },
 
       /**
@@ -43,7 +36,7 @@ module.exports = {
     ],
   },
   resolve: {
-    extensions: [".js", ".jsx"],
+    extensions: [".tsx", ".ts", ".js"],
   },
   output: {
     filename: "bundle.js",
