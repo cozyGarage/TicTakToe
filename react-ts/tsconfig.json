@@ -9,6 +9,6 @@
     "esModuleInterop": true,                   /* Emit additional JavaScript to ease support for importing CommonJS modules. This enables 'allowSyntheticDefaultImports' for type compatibility. */
     "forceConsistentCasingInFileNames": true,  /* Ensure that casing is correct in imports. */
     "strict": true,                            /* Enable all strict type-checking options. */
-    "include": ["**/*.ts", "**/*.tsx"]
+    "include": ["./src/**/*"],                 /* Specify an array of glob patterns that match files to be included in compilation. */
   }
 }
