@@ -110,12 +110,12 @@ export default class View {                           // The View class implemen
     });
   }
 
-  #initializeMoves(moves) {
-    this.$$.squares.forEach((square) => {
-      const existingMove = moves.find((move) => move.squareId === +square.id);
+  #initializeMoves(moves) {                                                       // The initializeMoves method initializes the moves on the game board.
+    this.$$.squares.forEach((square) => {                                         // The $$.squares.forEach method iterates over the square elements.
+      const existingMove = moves.find((move) => move.squareId === +square.id);    // The moves.find method checks if a move has already been made on the square.
 
-      if (existingMove) {
-        this.#handlePlayerMove(square, existingMove.player);
+      if (existingMove) {                                                         // The existingMove variable is used to determine if a move has already been made on the square.
+        this.#handlePlayerMove(square, existingMove.player);                      // The #handlePlayerMove method is responsible for rendering a player's move on the game board.
       }
     });
   }
@@ -172,12 +172,10 @@ export default class View {                           // The View class implemen
     return el;
   }
 
-  #qsAll(selector) {
-    const elList = document.querySelectorAll(selector);
-
-    if (!elList) throw new Error("Could not find elements");
-
-    return elList;
+  #qsAll(selector) {                                                                // The #qsAll method is a "safe selector" that selects a list of elements from the DOM.
+    const elList = document.querySelectorAll(selector);                             // The document.querySelectorAll method selects a list of elements from the DOM.
+    if (!elList) throw new Error("Could not find elements");                        // The #qsAll method throws an error if the elements do not exist
+    return elList;                                                                  // The elList variable is returned.
   }
 
   /**
