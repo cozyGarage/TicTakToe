@@ -1,8 +1,8 @@
-import Store from "./store.js"; // The Store class implements the Model component and is responsible for managing the game state and statistics.
-import View from "./view.js"; // The View class implements the View component and is responsible for rendering the game board and UI.
+import Store from "./store.js";           // The Store class implements the Model component and is responsible for managing the game state and statistics.
+import View from "./view.js";             // The View class implements the View component and is responsible for rendering the game board and UI.
 
-// The players array defines the configuration of the game's players including their icons, colors, and names.
-const players = [
+
+const players = [                         // The players array defines the configuration of the game's players including their icons, colors, and names.
   {
     id: 1,
     name: "Player 1",
@@ -17,16 +17,12 @@ const players = [
   },
 ];
 
-// MVC pattern
-// The init function is the entry point of the application that sets up the Model, View, and Controller components.
-function init() {
-  // "Model"
-  // The Store class implements the Model component and is responsible for managing the game state and statistics.
-  const store = new Store("game-state-key", players);
+                                        // MVC pattern
 
-  // "View"
-  // The View class implements the View component and is responsible for rendering the game board and UI.
-  const view = new View();
+function init() {                         // The init function is the entry point of the application that sets up the Model, View, and Controller components.
+  
+  const store = new Store("game-state-key", players); // The Store class implements the Model component and is responsible for managing the game state and statistics.
+  const view = new View();                // The View class implements the View component and is responsible for rendering the game board and UI.
 
   // The Controller logic includes event listeners and handlers that interact with the Model and View components.
 
@@ -35,8 +31,8 @@ function init() {
    *
    * The `statechange` event is a custom Event defined in the Store class
    */
-  store.addEventListener("statechange", () => {
-    view.render(store.game, store.stats);
+  store.addEventListener("statechange", () => { 
+    view.render(store.game, store.stats);              // The view.render method is responsible for rendering the game board and UI. 
   });
 
   /**
