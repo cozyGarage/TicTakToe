@@ -132,15 +132,15 @@ const initialState = {                // Initial state of the app
       const { status, moves } = this.game;                                  // The status and moves properties of the game object are destructured.
   
       if (status.isComplete) {                                              // If the isComplete property of the status object is true, the game is archived.
-        stateClone.history.currentRoundGames.push({
-          moves,
-          status,
+        stateClone.history.currentRoundGames.push({                           // The currentRoundGames property of the history object is pushed to an object with the moves and status properties.
+          moves,                                                              // The moves property is set to the moves variable.
+          status,                                                             // The status property is set to the status variable.
         });
       }
   
-      stateClone.currentGameMoves = [];
+      stateClone.currentGameMoves = [];                                       // The currentGameMoves property of the stateClone object is set to an empty array.
   
-      this.#saveState(stateClone);
+      this.#saveState(stateClone);                                            // The #saveState method is called with the stateClone variable as an argument.
     }
   
     /**
