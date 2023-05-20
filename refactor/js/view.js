@@ -88,25 +88,25 @@ export default class View {                           // The View class implemen
    * -----------------------------------------------------------------------------
    */
 
-  #updateScoreboard(p1Wins, p2Wins, ties) {
-    this.$.p1Wins.innerText = `${p1Wins} wins`;
-    this.$.p2Wins.innerText = `${p2Wins} wins`;
-    this.$.ties.innerText = `${ties} ties`;
+  #updateScoreboard(p1Wins, p2Wins, ties) {                                     // The #updateScoreboard method updates the scoreboard.
+    this.$.p1Wins.innerText = `${p1Wins} wins`;                                 // The $.p1Wins.innerText property sets the text content of the p1Wins element.
+    this.$.p2Wins.innerText = `${p2Wins} wins`;                                 // The $.p2Wins.innerText property sets the text content of the p2Wins element.
+    this.$.ties.innerText = `${ties} ties`;                                     // The $.ties.innerText property sets the text content of the ties element.
   }
 
-  #openModal(message) {
-    this.$.modal.classList.remove("hidden");
-    this.$.modalText.innerText = message;
+  #openModal(message) {                                                         // The #openModal method opens the modal and displays the winner or tie message.
+    this.$.modal.classList.remove("hidden");                                    // The $.modal.classList.remove method removes the hidden class from the modal element.
+    this.$.modalText.innerText = message;                                       // The $.modalText.innerText property sets the text content of the modalText element.
   }
 
-  #closeAll() {
-    this.#closeModal();
-    this.#closeMenu();
+  #closeAll() {                                                                 // The closeAll method closes the modal and menu.
+    this.#closeModal();                                                         // The closeModal method closes the modal.
+    this.#closeMenu();                                                          // The closeMenu method closes the menu.
   }
 
-  #clearMoves() {
-    this.$$.squares.forEach((square) => {
-      square.replaceChildren();
+  #clearMoves() {                                                               // The clearMoves method clears the moves from the game board.
+    this.$$.squares.forEach((square) => {                                       // The $$.squares.forEach method iterates over the square elements.
+      square.replaceChildren();                                                 // The square.replaceChildren method removes the contents of the square element.
     });
   }
 
