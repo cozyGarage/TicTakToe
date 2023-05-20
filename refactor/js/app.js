@@ -1,5 +1,5 @@
-import Store from "./store.js";
-import View from "./view.js";
+import Store from "./store.js"; // The Store class implements the Model component and is responsible for managing the game state and statistics.
+import View from "./view.js"; // The View class implements the View component and is responsible for rendering the game board and UI.
 
 // The players array defines the configuration of the game's players including their icons, colors, and names.
 const players = [
