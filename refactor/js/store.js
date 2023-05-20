@@ -93,16 +93,16 @@ const initialState = {                // Initial state of the app
       }
   
       return {
-        moves: state.currentGameMoves,
-        currentPlayer,
-        status: {
-          isComplete: winner != null || state.currentGameMoves.length === 9,
-          winner,
+        moves: state.currentGameMoves,                                  // The moves property is set to the currentGameMoves array.
+        currentPlayer,                                                  // The currentPlayer property is set to the currentPlayer variable.
+        status: {                                                       // The status property is set to an object with the isComplete and winner properties.
+          isComplete: winner != null || state.currentGameMoves.length === 9,    // The isComplete property is set to true if there is a winner or if there are 9 moves.
+          winner,                                                       // The winner property is set to the winner variable.
         },
       };
     }
   
-    playerMove(squareId) {
+    playerMove(squareId) {                                              // The playerMove method pushes a move to the moves array.  The id of the square is passed as an argument.
       /**
        * Never mutate state directly.  Create copy of state, edit the copy,
        * and save copy as new version of state.
@@ -110,14 +110,14 @@ const initialState = {                // Initial state of the app
        * @see https://developer.mozilla.org/en-US/docs/Web/API/structuredClone
        * @see https://redux.js.org/style-guide/#do-not-mutate-state
        */
-      const stateClone = structuredClone(this.#getState());
+      const stateClone = structuredClone(this.#getState());             // The stateClone variable is set to a deep copy of the state object.
   
-      stateClone.currentGameMoves.push({
-        squareId,
-        player: this.game.currentPlayer,
+      stateClone.currentGameMoves.push({                                // A move object is pushed to the currentGameMoves array.
+        squareId,                                                       // The squareId property is set to the squareId argument.
+        player: this.game.currentPlayer,                                  // The player property is set to the currentPlayer property of the game object.
       });
   
-      this.#saveState(stateClone);
+      this.#saveState(stateClone);                                      // The #saveState method is called with the stateClone variable as an argument.
     }
   
     /**
@@ -166,10 +166,10 @@ const initialState = {                // Initial state of the app
      * We are not using Redux here, but it gives a good overview of some essential concepts to managing state:
      * @see https://redux.js.org/understanding/thinking-in-redux/three-principles#changes-are-made-with-pure-functions
      */
-    #saveState(stateOrFn) {
-      const prevState = this.#getState();
+    #saveState(stateOrFn) {                                                               // The #saveState method accepts a stateOrFn argument.
+      const prevState = this.#getState();                                                 // The prevState variable is set to the return value of the #getState method.
   
-      let newState;
+      let newState;                                                                       // The newState variable is declared.
   
       switch (typeof stateOrFn) {
         case "function":
@@ -182,12 +182,12 @@ const initialState = {                // Initial state of the app
           throw new Error("Invalid argument passed to saveState");
       }
   
-      window.localStorage.setItem(this.storageKey, JSON.stringify(newState));
-      this.dispatchEvent(new Event("statechange"));
+      window.localStorage.setItem(this.storageKey, JSON.stringify(newState));             // The newState variable is stringified and saved to localStorage.
+      this.dispatchEvent(new Event("statechange"));                                       // A custom statechange event is dispatched.
     }
   
-    #getState() {
-      const item = window.localStorage.getItem(this.storageKey);
-      return item ? JSON.parse(item) : initialState;
+    #getState() {                                                                       // The #getState method returns the state object.
+      const item = window.localStorage.getItem(this.storageKey);                        // The item variable is set to the value of the storageKey property in localStorage.
+      return item ? JSON.parse(item) : initialState;                                    // If the item variable is truthy, the value is parsed and returned.  Otherwise, the initialState variable is returned.
     }
   }
