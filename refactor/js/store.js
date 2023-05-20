@@ -146,12 +146,12 @@ const initialState = {                // Initial state of the app
     /**
      * Resets the scoreboard (wins, losses, and ties)
      */
-    newRound() {
-      this.reset();
+    newRound() {                                                                            // The newRound method resets the game state for a new round.
+      this.reset();                                                                         // The reset method is called.
   
-      const stateClone = structuredClone(this.#getState());
-      stateClone.history.allGames.push(...stateClone.history.currentRoundGames);
-      stateClone.history.currentRoundGames = [];
+      const stateClone = structuredClone(this.#getState());                                 // The stateClone variable is set to a deep copy of the state object.
+      stateClone.history.allGames.push(...stateClone.history.currentRoundGames);              // The allGames property of the history object is set to an array of the games played in the current round.
+      stateClone.history.currentRoundGames = [];                                            // The currentRoundGames property of the history object is set to an empty array.
   
       this.#saveState(stateClone);
     }
@@ -171,23 +171,23 @@ const initialState = {                // Initial state of the app
   
       let newState;                                                                       // The newState variable is declared.
   
-      switch (typeof stateOrFn) {
-        case "function":
-          newState = stateOrFn(prevState);
+      switch (typeof stateOrFn) {                                                         // The typeof operator checks the type of the stateOrFn argument.
+        case "function":                                                                  // If the type is function, the newState variable is set to the return value of the stateOrFn function.
+          newState = stateOrFn(prevState);                                                // The prevState variable is passed as an argument to the stateOrFn function.
           break;
         case "object":
-          newState = stateOrFn;
+          newState = stateOrFn;                                                           // If the type is object, the newState variable is set to the stateOrFn argument.
           break;
         default:
-          throw new Error("Invalid argument passed to saveState");
+          throw new Error("Invalid argument passed to saveState");                        // If the type is neither function nor object, an error is thrown.
       }
   
       window.localStorage.setItem(this.storageKey, JSON.stringify(newState));             // The newState variable is stringified and saved to localStorage.
       this.dispatchEvent(new Event("statechange"));                                       // A custom statechange event is dispatched.
     }
   
-    #getState() {                                                                       // The #getState method returns the state object.
-      const item = window.localStorage.getItem(this.storageKey);                        // The item variable is set to the value of the storageKey property in localStorage.
-      return item ? JSON.parse(item) : initialState;                                    // If the item variable is truthy, the value is parsed and returned.  Otherwise, the initialState variable is returned.
+    #getState() {                                                                         // The #getState method returns the state object.
+      const item = window.localStorage.getItem(this.storageKey);                          // The item variable is set to the value of the storageKey property in localStorage.
+      return item ? JSON.parse(item) : initialState;                                      // If the item variable is truthy, the value is parsed and returned.  Otherwise, the initialState variable is returned.
     }
   }
