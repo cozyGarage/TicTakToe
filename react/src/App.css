@@ -1,6 +1,6 @@
 /* Game controls (symbols, current turn indicator, wipe score btn) */
 
-.grid {
+.grid {                       
     display: grid;
     grid-template-columns: repeat(3, 80px);
     grid-template-rows: 50px repeat(3, 80px) 60px;

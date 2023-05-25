@@ -54,7 +54,7 @@ export default function App() {                                          // this
     setState((prev) => {                             // this is the state of the game before the move     
       const { currentGameMoves } = structuredClone(prev);     // this is the copy of the state of the game before the move
 
-      currentGameMoves.push({       
+      currentGameMoves.push({                  // this is the current game moves        
         player,
         squareId,
       });
