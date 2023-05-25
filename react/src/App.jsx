@@ -42,19 +42,19 @@ export default function App() {                                          // this
 
       // Must archive current round in addition to resetting current game
       if (isNewRound) {
-        stateCopy.history.allGames.push(...stateCopy.history.currentRoundGames);
-        stateCopy.history.currentRoundGames = [];
+        stateCopy.history.allGames.push(...stateCopy.history.currentRoundGames);      // this is the history of all the games
+        stateCopy.history.currentRoundGames = [];       // this is the current round of the game
       }
 
       return stateCopy;
     });
   };
 
-  const handlePlayerMove = (squareId, player) => {
-    setState((prev) => {
-      const { currentGameMoves } = structuredClone(prev);
+  const handlePlayerMove = (squareId, player) => {        // this is the function to handle the player move
+    setState((prev) => {                             // this is the state of the game before the move     
+      const { currentGameMoves } = structuredClone(prev);     // this is the copy of the state of the game before the move
 
-      currentGameMoves.push({
+      currentGameMoves.push({       
         player,
         squareId,
       });
