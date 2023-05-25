@@ -1,4 +1,4 @@
-const players = [
+const players = [                                     // object array players
     {
       id: 1,
       name: "Player 1",
@@ -13,9 +13,9 @@ const players = [
     },
   ];
   
-  export function deriveStats(state) {
+  export function deriveStats(state) {                          // deriveStats function to calculate stats of players 
     return {
-      playersWithStats: players.map((player) => {
+      playersWithStats: players.map((player) => {        // map function  to iterate through players array and return new array
         const wins = state.history.currentRoundGames.filter(
           (game) => game.status.winner?.id === player.id
         ).length;

@@ -11,26 +11,26 @@ import Footer from "./components/Footer";
 import Modal from "./components/Modal";
 import Menu from "./components/Menu";
 
-const initialState = {
-  currentGameMoves: [],
-  history: {
-    currentRoundGames: [],
-    allGames: [],
+const initialState = {                                                          // this is the initial state of the game
+  currentGameMoves: [],                                                         // this is the current game moves
+  history: {                                                                  // this is the history of the game            
+    currentRoundGames: [],                                                  // this is the current round of the game    
+    allGames: [],                                                          // this is all the games
   },
 };
 
-export default function App() {
-  const [state, setState] = useLocalStorage("game-state-key", initialState);
+export default function App() {                                          // this is the main function of the game
+  const [state, setState] = useLocalStorage("game-state-key", initialState);      // this is the state of the game
 
   // Derived state (updates on every state change)
-  const game = deriveGame(state);
-  const stats = deriveStats(state);
+  const game = deriveGame(state);                       // this is the game
+  const stats = deriveStats(state);                     // this is the stats
 
-  const resetGame = (isNewRound) => {
-    setState((prevState) => {
-      const stateCopy = structuredClone(prevState);
+  const resetGame = (isNewRound) => {                         // this is the function to reset the game 
+    setState((prevState) => {                                 // this is the state of the game before the reset 
+      const stateCopy = structuredClone(prevState);           // this is the copy of the state of the game before the reset 
       // If game is complete, archive it to history object
-      if (game.status.isComplete) {
+      if (game.status.isComplete) {     
         const { moves, status } = game;
         stateCopy.history.currentRoundGames.push({
           moves,
@@ -38,7 +38,7 @@ export default function App() {
         });
       }
 
-      stateCopy.currentGameMoves = [];
+      stateCopy.currentGameMoves = [];                // this is the current game moves   
 
       // Must archive current round in addition to resetting current game
       if (isNewRound) {
