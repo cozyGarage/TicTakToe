@@ -1,3 +1,4 @@
+import PropTypes from "prop-types";
 import classNames from "classnames";
 import { useState } from "react";
 
@@ -8,19 +9,27 @@ export default function Menu({ onAction }) {
 
   return (
     <div className="menu">
-      <button className="menu-btn" onClick={() => setMenuOpen((prev) => !prev)}>
+      <button
+        className="menu-btn"
+        onClick={() => setMenuOpen((prev) => !prev)}
+        aria-expanded={menuOpen}
+        aria-haspopup="true"
+        aria-label="Game actions menu"
+      >
         Actions
         <i
           className={classNames(
             "fa-solid",
             menuOpen ? "fa-chevron-up" : "fa-chevron-down"
           )}
+          aria-hidden="true"
         ></i>
       </button>
 
       {menuOpen && (
-        <div className="items border">
+        <div className="items border" role="menu">
           <button
+            role="menuitem"
             onClick={() => {
               onAction("reset");
               setMenuOpen(false);
@@ -29,6 +38,7 @@ export default function Menu({ onAction }) {
             Reset
           </button>
           <button
+            role="menuitem"
             onClick={() => {
               onAction("new-round");
               setMenuOpen(false);
@@ -41,3 +51,7 @@ export default function Menu({ onAction }) {
     </div>
   );
 }
+
+Menu.propTypes = {
+  onAction: PropTypes.func.isRequired,
+};

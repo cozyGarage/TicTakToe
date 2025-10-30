@@ -32,16 +32,15 @@ export function useLocalStorage(key, initialValue) {
         console.log(error);
       }
     },
-    [key, setInternalValue, internalValue, initialValue]
+    [key, internalValue, initialValue]
   );
 
-  // Any time storage changes in another tab, update state
   useEffect(() => {
     function handleStorageChange() {
       try {
         const latestValue = localStorage.getItem(key);
         if (latestValue) {
-          setValue(JSON.parse(latestValue));
+          setInternalValue(JSON.parse(latestValue));
         }
       } catch (err) {
         console.error(err);
@@ -53,7 +52,7 @@ export function useLocalStorage(key, initialValue) {
     return () => {
       window.removeEventListener("storage", handleStorageChange);
     };
-  }, []);
+  }, [key]);
 
   return [internalValue, setValue];
 }
