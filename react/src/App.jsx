@@ -23,9 +23,10 @@ export default function App() {
     (isNewRound) => {
       setState((prevState) => {
         const stateCopy = structuredClone(prevState);
+        const currentGame = deriveGame(prevState);
 
-        if (game.status.isComplete) {
-          const { moves, status } = game;
+        if (currentGame.status.isComplete) {
+          const { moves, status } = currentGame;
           stateCopy.history.currentRoundGames.push({
             moves,
             status,
@@ -42,7 +43,7 @@ export default function App() {
         return stateCopy;
       });
     },
-    [game, setState]
+    [setState]
   );
 
   const handlePlayerMove = useCallback(

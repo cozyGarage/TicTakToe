@@ -26,15 +26,14 @@ export function useLocalStorage(key, initialValue) {
       try {
         setInternalValue((prevValue) => {
           const valueToStore = value instanceof Function ? value(prevValue) : value;
-          const finalValue = valueToStore ?? initialValue;
-          localStorage.setItem(key, JSON.stringify(finalValue));
-          return finalValue;
+          localStorage.setItem(key, JSON.stringify(valueToStore));
+          return valueToStore;
         });
       } catch (error) {
         console.log(error);
       }
     },
-    [key, initialValue]
+    [key]
   );
 
   useEffect(() => {
