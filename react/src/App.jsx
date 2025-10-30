@@ -42,7 +42,7 @@ export default function App() {
         return stateCopy;
       });
     },
-    [game.status.isComplete, game.moves, game.status, setState]
+    [game, setState]
   );
 
   const handlePlayerMove = useCallback(

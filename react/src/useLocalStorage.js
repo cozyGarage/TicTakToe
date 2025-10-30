@@ -24,15 +24,17 @@ export function useLocalStorage(key, initialValue) {
   const setValue = useCallback(
     (value) => {
       try {
-        const valueToStore =
-          value instanceof Function ? value(internalValue) : value;
-        setInternalValue(valueToStore ?? initialValue);
-        localStorage.setItem(key, JSON.stringify(valueToStore));
+        setInternalValue((prevValue) => {
+          const valueToStore = value instanceof Function ? value(prevValue) : value;
+          const finalValue = valueToStore ?? initialValue;
+          localStorage.setItem(key, JSON.stringify(finalValue));
+          return finalValue;
+        });
       } catch (error) {
         console.log(error);
       }
     },
-    [key, internalValue, initialValue]
+    [key, initialValue]
   );
 
   useEffect(() => {
