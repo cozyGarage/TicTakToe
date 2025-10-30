@@ -24,24 +24,24 @@ export function useLocalStorage(key, initialValue) {
   const setValue = useCallback(
     (value) => {
       try {
-        const valueToStore =
-          value instanceof Function ? value(internalValue) : value;
-        setInternalValue(valueToStore ?? initialValue);
-        localStorage.setItem(key, JSON.stringify(valueToStore));
+        setInternalValue((prevValue) => {
+          const valueToStore = value instanceof Function ? value(prevValue) : value;
+          localStorage.setItem(key, JSON.stringify(valueToStore));
+          return valueToStore;
+        });
       } catch (error) {
         console.log(error);
       }
     },
-    [key, setInternalValue, internalValue, initialValue]
+    [key]
   );
 
-  // Any time storage changes in another tab, update state
   useEffect(() => {
     function handleStorageChange() {
       try {
         const latestValue = localStorage.getItem(key);
         if (latestValue) {
-          setValue(JSON.parse(latestValue));
+          setInternalValue(JSON.parse(latestValue));
         }
       } catch (err) {
         console.error(err);
@@ -53,7 +53,7 @@ export function useLocalStorage(key, initialValue) {
     return () => {
       window.removeEventListener("storage", handleStorageChange);
     };
-  }, []);
+  }, [key]);
 
   return [internalValue, setValue];
 }

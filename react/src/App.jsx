@@ -1,78 +1,78 @@
 import "./App.css";
 
+import { useMemo, useCallback } from "react";
 import classNames from "classnames";
 
-// State helpers
 import { useLocalStorage } from "./useLocalStorage";
 import { deriveStats, deriveGame } from "./utils";
+import { INITIAL_STATE, STORAGE_KEY } from "./constants";
 
-// Component imports
 import Footer from "./components/Footer";
 import Modal from "./components/Modal";
 import Menu from "./components/Menu";
+import Square from "./components/Square";
+import ScoreBoard from "./components/ScoreBoard";
 
-const initialState = {                                                          // this is the initial state of the game
-  currentGameMoves: [],                                                         // this is the current game moves
-  history: {                                                                  // this is the history of the game            
-    currentRoundGames: [],                                                  // this is the current round of the game    
-    allGames: [],                                                          // this is all the games
-  },
-};
+export default function App() {
+  const [state, setState] = useLocalStorage(STORAGE_KEY, INITIAL_STATE);
 
-export default function App() {                                          // this is the main function of the game
-  const [state, setState] = useLocalStorage("game-state-key", initialState);      // this is the state of the game
+  const game = useMemo(() => deriveGame(state), [state]);
+  const stats = useMemo(() => deriveStats(state), [state]);
 
-  // Derived state (updates on every state change)
-  const game = deriveGame(state);                       // this is the game
-  const stats = deriveStats(state);                     // this is the stats
+  const resetGame = useCallback(
+    (isNewRound) => {
+      setState((prevState) => {
+        const stateCopy = structuredClone(prevState);
+        const currentGame = deriveGame(prevState);
 
-  const resetGame = (isNewRound) => {                         // this is the function to reset the game 
-    setState((prevState) => {                                 // this is the state of the game before the reset 
-      const stateCopy = structuredClone(prevState);           // this is the copy of the state of the game before the reset 
-      // If game is complete, archive it to history object
-      if (game.status.isComplete) {     
-        const { moves, status } = game;
-        stateCopy.history.currentRoundGames.push({
-          moves,
-          status,
-        });
-      }
+        if (currentGame.status.isComplete) {
+          const { moves, status } = currentGame;
+          stateCopy.history.currentRoundGames.push({
+            moves,
+            status,
+          });
+        }
 
-      stateCopy.currentGameMoves = [];                // this is the current game moves   
+        stateCopy.currentGameMoves = [];
 
-      // Must archive current round in addition to resetting current game
-      if (isNewRound) {
-        stateCopy.history.allGames.push(...stateCopy.history.currentRoundGames);      // this is the history of all the games
-        stateCopy.history.currentRoundGames = [];       // this is the current round of the game
-      }
+        if (isNewRound) {
+          stateCopy.history.allGames.push(...stateCopy.history.currentRoundGames);
+          stateCopy.history.currentRoundGames = [];
+        }
 
-      return stateCopy;
-    });
-  };
-
-  const handlePlayerMove = (squareId, player) => {        // this is the function to handle the player move
-    setState((prev) => {                             // this is the state of the game before the move     
-      const { currentGameMoves } = structuredClone(prev);     // this is the copy of the state of the game before the move
-
-      currentGameMoves.push({                  // this is the current game moves        
-        player,
-        squareId,
+        return stateCopy;
       });
+    },
+    [setState]
+  );
 
-      return {
-        ...prev,
-        currentGameMoves,
-      };
-    });
-  };
+  const handlePlayerMove = useCallback(
+    (squareId, player) => {
+      setState((prev) => {
+        const { currentGameMoves } = structuredClone(prev);
+
+        currentGameMoves.push({
+          player,
+          squareId,
+        });
+
+        return {
+          ...prev,
+          currentGameMoves,
+        };
+      });
+    },
+    [setState]
+  );
 
   return (
     <>
       <main>
-        <div className="grid">
+        <div className="grid" role="application" aria-label="Tic Tac Toe Game">
           <div className={classNames("turn", game.currentPlayer.colorClass)}>
             <i
               className={classNames("fa-solid", game.currentPlayer.iconClass)}
+              aria-hidden="true"
             ></i>
             <p>{game.currentPlayer.name}, you're up!</p>
           </div>
@@ -89,51 +89,21 @@ export default function App() {                                          // this
             );
 
             return (
-              <div
+              <Square
                 key={squareId}
-                id={squareId.toString()}
-                className="square shadow"
+                squareId={squareId}
+                move={existingMove}
                 onClick={() => {
-                  // Don't make a move on square if there already is one
-                  if (existingMove) return;
-
-                  handlePlayerMove(squareId, game.currentPlayer);
+                  if (!existingMove && !game.status.isComplete) {
+                    handlePlayerMove(squareId, game.currentPlayer);
+                  }
                 }}
-              >
-                {existingMove && (
-                  <i
-                    className={classNames(
-                      "fa-solid",
-                      existingMove.player.iconClass,
-                      existingMove.player.colorClass
-                    )}
-                  ></i>
-                )}
-              </div>
+                isGameComplete={game.status.isComplete}
+              />
             );
           })}
 
-          <div
-            className="score shadow"
-            style={{ backgroundColor: "var(--turquoise)" }}
-          >
-            <p>Player 1</p>
-            <span>{stats.playersWithStats[0].wins} Wins</span>
-          </div>
-          <div
-            className="score shadow"
-            style={{ backgroundColor: "var(--light-gray)" }}
-          >
-            <p>Ties</p>
-            <span>{stats.ties}</span>
-          </div>
-          <div
-            className="score shadow"
-            style={{ backgroundColor: "var(--yellow)" }}
-          >
-            <p>Player 2</p>
-            <span>{stats.playersWithStats[1].wins} Wins</span>
-          </div>
+          <ScoreBoard stats={stats} />
         </div>
       </main>
 
